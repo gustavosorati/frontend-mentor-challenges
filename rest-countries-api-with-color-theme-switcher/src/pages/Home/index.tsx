@@ -3,7 +3,7 @@ import { api } from "../../api";
 import { CountryCard } from "../../components/CountryCard";
 import { CountriesContainer } from "../../components/Header/styles";
 import { InputElement } from "../../components/Input";
-import { FiltersContainer, HomeContainer } from "./styles";
+import { FiltersContainer, HomeContainer, Page, PageContainer } from "./styles";
 
 interface ICountries {
     name: string;
@@ -11,6 +11,18 @@ interface ICountries {
     region: string;
     capital: string[];
     flag: string;
+}[]
+
+interface Ifetch {
+    data: {
+        name: string;
+        population: number;
+        region: string;
+        capital: string[];
+        flag: string;
+    }[]
+    pages: number
+    length: number
 }
 
 interface IFetchCountries {
@@ -25,26 +37,42 @@ interface IFetchCountries {
     };
 }
 
+// paginação
+// saber quantos array
+// Definir um limite por pagina
+// separar
 
 export function Home() {
-    const [coutries, setCountries] = useState<ICountries[]>([]);
+    const [contries, setContries] = useState<Ifetch>({} as Ifetch);
 
     useEffect(() => {
         const fetchData = async () => {
             const {data} = await api.get<IFetchCountries[]>('')
             
-            const formatedObject  = data.map(country => {
-                return {
+            const obj  = data.map(country => {
+                return {   
                     name: country.name.common,
                     population: country.population,
                     region: country.region,
                     capital: country.capital,
                     flag: country.flags.png
                 }
+            });
+
+            const pages = Math.round(data.length / 20);
+            const length = data.length;
+
+            console.log({
+                data: obj, 
+                pages, 
+                length
             })
 
-            console.log(formatedObject)
-            setCountries(formatedObject)
+            setContries({
+                data: obj, 
+                pages, 
+                length
+            })
         }
 
         fetchData();
@@ -65,7 +93,7 @@ export function Home() {
             </FiltersContainer>
 
             <CountriesContainer>
-                {coutries.map(country => {
+                {contries.data && contries.data.map(country => {
                     return (
                         <CountryCard 
                             key={country.name}
@@ -77,7 +105,16 @@ export function Home() {
                         />
                     )
                 })}
+
             </CountriesContainer>
+
+            <PageContainer>
+                {[...Array(contries.pages)].map((x, i) =>
+                    <Page>
+                        {i < 9 ? `0${i}` : i}
+                    </Page>
+                )}
+                </PageContainer>
         </HomeContainer>
     )
 }
