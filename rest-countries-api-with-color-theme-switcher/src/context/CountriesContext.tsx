@@ -31,7 +31,7 @@ interface IContriesContext {
         flag: string;
     }[]
     findByName: (name: string) => void
-    findByRegion: (name: string) => void
+    findByRegion: (region: string) => void
 }
 
 
@@ -83,8 +83,8 @@ export const CountriesProvider = ({children}: CountriesProviderProps) => {
         setData(obj)
     }
 
-    async function findByRegion(name: string) {
-        let response = await api.get<IFetchData[]>(`name/${name}`);
+    async function findByRegion(region: string) {
+        let response = await api.get<IFetchData[]>(`region/${region}`);
 
         const obj  = response.data.map(country => {
             return {   
@@ -95,8 +95,6 @@ export const CountriesProvider = ({children}: CountriesProviderProps) => {
                 flag: country.flags.png
             }
         });
-
-        console.log(obj)
 
         setData(obj)
     }

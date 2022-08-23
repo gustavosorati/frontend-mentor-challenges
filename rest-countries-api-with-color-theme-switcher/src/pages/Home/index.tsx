@@ -3,6 +3,7 @@ import { api } from "../../api";
 import { CountryCard } from "../../components/CountryCard";
 import { CountriesContainer } from "../../components/Header/styles";
 import { InputElement } from "../../components/Input";
+import { SelectElement } from "../../components/Select";
 import { ContriesContext } from "../../context/CountriesContext";
 import { FiltersContainer, HomeContainer, Page, PageContainer } from "./styles";
 
@@ -15,12 +16,7 @@ export function Home() {
             <FiltersContainer>
                 <InputElement />
 
-                <select>
-                    <option>Teste</option>
-                    <option>Teste1</option>
-                    <option>Teste2</option>
-                    <option>Teste3</option>
-                </select>
+                <SelectElement />
             </FiltersContainer>
 
             <CountriesContainer>
