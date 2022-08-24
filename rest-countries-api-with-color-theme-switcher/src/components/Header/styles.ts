@@ -14,11 +14,29 @@ export const HeaderContainer = styled.header`
         align-items: center;
         justify-content: space-between;
         padding: 0 3rem;
+
+        h2 {
+            color: ${({theme}) => theme["text-500"]}
+        }
     }
 `
 
 export const ThemeContainer = styled.div`
     display: flex;
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background-color: transparent;
+        border: none;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 24px;
+        padding: 5px;
+
+    }
 `
 
 export const CountriesContainer = styled.section`

@@ -15,7 +15,7 @@ export const GlobalStyles = createGlobalStyle`
         font-family: 'Nunito Sans', sans-serif;
     }
 
-    input, option, select {
+    input, button, option, select {
         font-family: 'Nunito Sans', sans-serif;
     }
 `

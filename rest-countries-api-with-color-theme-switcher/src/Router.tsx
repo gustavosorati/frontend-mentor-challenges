@@ -1,13 +1,22 @@
+import { useContext } from 'react'
 import {Route, Routes} from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
+import { ThemeSwitcherContext } from './context/ThemeSwitcherContext'
 import { DefaultLayout } from './layouts/DefaultLayout'
 import { Home } from './pages/Home'
 
-export function Router() {
+interface RouterProps {
+    themeSwitch: () => void;
+}
+
+export function Router({themeSwitch}: RouterProps) {
+
     return (
         <Routes>
-            <Route element={<DefaultLayout />}>
+            <Route element={<DefaultLayout themeSwitch={themeSwitch} />}>
                 <Route path="/" element={<Home />} />
             </Route>
         </Routes>
+
     )
 }

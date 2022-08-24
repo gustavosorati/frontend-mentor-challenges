@@ -2,10 +2,14 @@ import { Outlet } from "react-router-dom";
 import { Header } from "../components/Header";
 import { LayoutContainer } from "./styles";
 
-export function DefaultLayout() {
+interface DefaultLayout {
+    themeSwitch: () => void;
+}
+
+export function DefaultLayout({themeSwitch}: DefaultLayout) {
     return (
         <LayoutContainer>
-            <Header />
+            <Header onSwitch={themeSwitch} />
             
             <Outlet />
         </LayoutContainer>
