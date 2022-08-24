@@ -7,6 +7,7 @@ export const HeaderContainer = styled.header`
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 10px 1px rgba(0,0,0,.1);
+    background-color: ${({theme}) => theme.base};
 
     > div {
         width: 100%;
@@ -28,14 +29,15 @@ export const ThemeContainer = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 12px;
+        gap: 8px;
         background-color: transparent;
         border: none;
         font-size: 1rem;
         font-weight: 600;
-        line-height: 24px;
+        
         padding: 5px;
 
+        cursor: pointer;
     }
 `
 

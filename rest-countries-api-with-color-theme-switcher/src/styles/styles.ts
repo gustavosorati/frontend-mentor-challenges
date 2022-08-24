@@ -13,9 +13,11 @@ export const GlobalStyles = createGlobalStyle`
     body {
         background-color: ${({theme}) => theme.background};
         font-family: 'Nunito Sans', sans-serif;
+        color: ${({theme}) => theme["text-500"]};
     }
 
     input, button, option, select {
         font-family: 'Nunito Sans', sans-serif;
+        color: ${({theme}) => theme["text-500"]};
     }
 `

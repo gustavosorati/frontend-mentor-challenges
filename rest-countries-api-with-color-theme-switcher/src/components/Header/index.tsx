@@ -1,4 +1,5 @@
-import { Moon } from "phosphor-react";
+import { Moon, Sun } from "phosphor-react";
+import { useTheme } from "styled-components";
 import { HeaderContainer, ThemeContainer } from "./styles";
 
 
@@ -7,6 +8,7 @@ interface HeaderProps {
 }
 
 export function Header({onSwitch}: HeaderProps) {
+    const theme = useTheme();
 
     return (
         <HeaderContainer>
@@ -15,8 +17,19 @@ export function Header({onSwitch}: HeaderProps) {
 
                 <ThemeContainer>
                     <button type="button" onClick={onSwitch}>
-                        <Moon weight="fill" size={22}/>
-                        Dark Mode
+                    {theme.title === "light" ? (
+                        <>
+                            <Moon weight="fill" size={22}/>
+                            Dark Mode
+                        </>
+                    ) : (
+                        <>
+                            <Sun weight="fill" size={22}/>    
+                            Light Mode
+                        </>
+                    )}
+
+                        
                     </button>
                 </ThemeContainer>
             </div>

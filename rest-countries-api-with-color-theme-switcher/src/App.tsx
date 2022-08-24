@@ -11,7 +11,6 @@ function App() {
   const [ theme, setTheme] = useState(lightTheme);
 
   function changeTheme() {
-    console.log(theme)
     setTheme(theme.title === 'light' ? darkTheme : lightTheme);
   }
 

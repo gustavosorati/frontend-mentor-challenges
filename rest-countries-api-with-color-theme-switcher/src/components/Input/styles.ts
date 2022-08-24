@@ -21,5 +21,6 @@ export const InputElementContainer = styled.div`
         color: ${({theme}) => theme.input};
         font-weight: 600;
         letter-spacing: .5px;
+        background-color: transparent;
     }   
 `
