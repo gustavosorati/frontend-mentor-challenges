@@ -17,6 +17,7 @@ export const CardContainer = styled.div`
         border-radius: 6px 6px 0 0;
 
     }
+
 `
 
 export const BasicInformationContainer = styled.div`

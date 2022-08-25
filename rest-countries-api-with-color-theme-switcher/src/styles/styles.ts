@@ -20,4 +20,11 @@ export const GlobalStyles = createGlobalStyle`
         font-family: 'Nunito Sans', sans-serif;
         color: ${({theme}) => theme["text-500"]};
     }
+
+    
+    a {
+        text-decoration: none;
+        color: ${({theme}) => theme["text-500"]};
+
+    }
 `

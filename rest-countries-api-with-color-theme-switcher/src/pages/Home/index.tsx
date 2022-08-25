@@ -8,8 +8,15 @@ import { ContriesContext } from "../../context/CountriesContext";
 import { FiltersContainer, HomeContainer, Page, PageContainer } from "./styles";
 
 export function Home() {
-    const { data } = useContext(ContriesContext)
+    const { data, onLoad } = useContext(ContriesContext)
     
+    useEffect(() => {
+        const load =async () => {
+            await onLoad()
+        }
+        load()
+    }, [])
+
     return (
         <HomeContainer className="container">
             

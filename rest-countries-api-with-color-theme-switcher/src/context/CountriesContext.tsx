@@ -30,8 +30,9 @@ interface IContriesContext {
         capital: string[];
         flag: string;
     }[]
-    findByName: (name: string) => void
-    findByRegion: (region: string) => void
+    findByName: (name: string) => Promise<void>
+    findByRegion: (region: string) => Promise<void>
+    onLoad: () => Promise<void>
 }
 
 
@@ -44,9 +45,30 @@ interface CountriesProviderProps {
 export const CountriesProvider = ({children}: CountriesProviderProps) => {
     const [data, setData] = useState<ICountries[]>([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const {data: d} = await api.get<IFetchData[]>('/all')
+    // useEffect(() => {
+    //     console.log('entrou 1')
+    //     const fetchData = async () => {
+    //         const {data: d} = await api.get<IFetchData[]>('/all')
+            
+    //         const obj  = d.map(country => {
+    //             return {   
+    //                 name: country.name.common,
+    //                 population: country.population,
+    //                 region: country.region,
+    //                 capital: country.capital,
+    //                 flag: country.flags.png
+    //             }
+    //         });
+    
+    //         setData(obj)
+    //     }
+
+    //     fetchData();
+    // }, []);
+
+    async function onLoad(){
+        console.log('entrou 1')
+        const {data: d} = await api.get<IFetchData[]>('/all')
             
             const obj  = d.map(country => {
                 return {   
@@ -59,10 +81,7 @@ export const CountriesProvider = ({children}: CountriesProviderProps) => {
             });
     
             setData(obj)
-        }
-
-        fetchData();
-    }, []);
+    }
 
 
     async function findByName(name: string) {
@@ -77,8 +96,6 @@ export const CountriesProvider = ({children}: CountriesProviderProps) => {
                 flag: country.flags.png
             }
         });
-
-        console.log(obj)
 
         setData(obj)
     }
@@ -101,7 +118,7 @@ export const CountriesProvider = ({children}: CountriesProviderProps) => {
 
 
     return (
-        <ContriesContext.Provider value={{ data, findByName, findByRegion }}>
+        <ContriesContext.Provider value={{ data, findByName, findByRegion, onLoad }}>
             {children}
         </ContriesContext.Provider>
     )
