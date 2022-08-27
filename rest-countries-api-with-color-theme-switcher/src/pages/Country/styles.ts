@@ -13,6 +13,7 @@ export const Button = styled.button`
     display: flex;
     border-radius: 6px;
     margin-bottom: 4rem;
+    box-shadow: 0 0px 10px  rgba(0,0,0,.1);
     
     a {
         display: flex;
