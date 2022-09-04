@@ -7,6 +7,7 @@ export const InputElementContainer = styled.div`
     gap: .5rem;
     padding: 0 1rem;
     background-color: ${({theme}) => theme.base};
+    
     box-shadow: 0 0px 8px 0px rgba(0,0,0,.1);
     border-radius: 6px;
 
@@ -22,5 +23,10 @@ export const InputElementContainer = styled.div`
         font-weight: 600;
         letter-spacing: .5px;
         background-color: transparent;
+
+        &::placeholder {
+            color: ${({theme}) => theme.input};
+
+        }
     }   
 `

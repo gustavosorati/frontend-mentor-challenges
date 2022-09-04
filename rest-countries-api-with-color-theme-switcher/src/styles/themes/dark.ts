@@ -3,7 +3,7 @@ export const darkTheme = {
     title: 'dark',
 
     'text-500': '#fff',
-    input: 'hsl(0, 0%, 52%)',
+    input: '#fff',
     background: 'hsl(207, 26%, 17%)',
 
     base: '#2b3743'

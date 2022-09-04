@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { api } from "../../api";
 import { CountryCard } from "../../components/CountryCard";
 import { CountriesContainer } from "../../components/Header/styles";
 import { InputElement } from "../../components/Input";
@@ -8,15 +7,8 @@ import { ContriesContext } from "../../context/CountriesContext";
 import { FiltersContainer, HomeContainer, Page, PageContainer } from "./styles";
 
 export function Home() {
-    const { data, onLoad } = useContext(ContriesContext)
+    const { data } = useContext(ContriesContext)
     
-    useEffect(() => {
-        const load =async () => {
-            await onLoad()
-        }
-        load()
-    }, [])
-
     return (
         <HomeContainer className="container">
             
@@ -45,31 +37,3 @@ export function Home() {
         </HomeContainer>
     )
 }
-
-// PAGINAÇÃO
-{/* <PageContainer>
-               {[...Array(contries.pages)].map((x, i) =>
-                    <Page>
-                        {i < 9 ? `0${i}` : i}
-                    </Page>
-                )} 
-
-                <ul>
-                    {Array.from({ length: MAX_ITEMS })
-                        .map((_, index) => index + contries.first)
-                        .map((page) => (
-                            <li>
-                                <button>{page}</button>
-
-                            </li>
-                        ))
-                    }
-                </ul>   
-</PageContainer> */}
-
-// function pagination(limit: number, total: number, offset: number) {
-//     const currentPage = offset ? (offset - limit) + 1 : 1;
-//     const pages = Math.ceil(total / limit);
-//     const first = Math.max(currentPage - MAX_LEFT, 1);        
-//     return { pages, currentPage, first}
-// }

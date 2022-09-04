@@ -13,7 +13,7 @@ export function SelectElement() {
 
     return (
         <SelectElementContainer onChange={handleOnSelect} value={region} placeholder="Filter By Value">
-            <option value="all">All</option>
+            <option>Filter By Region</option>
             <option value="africa">Africa</option>
             <option value="america">America</option>
             <option value="asia">Asia</option>

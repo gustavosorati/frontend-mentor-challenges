@@ -1,24 +1,60 @@
 import { ArrowLeft } from "phosphor-react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { api } from "../../api";
 
 import { ContriesContext } from "../../context/CountriesContext";
 import { BorderCountries, Button, CountryContainer, CountryContent, CountryInformations } from "./styles";
 
-export function Country({ }) {
-    const {pathname} = useLocation()
-    const { data, findByName } = useContext(ContriesContext)
-    
-    const country = data[0];
+interface IFetchData {
+    name: {
+        common: string;
+    };
+    population: number;
+    region: string;
+    subregion: string;
+    capital: string[];
+    flags: {
+        png: string;
+    };
+    currencies: {};
+}
+
+interface ICountrie {
+    name: string;
+    population: number;
+    region: string;
+    subregion: string;
+    capital: string[];
+    flag: string;
+    currencies: {};
+}
+
+export function Country() {
+    const {pathname} = useLocation();
+    const [country, setCountry]  = useState<ICountrie>({} as ICountrie);
 
     useEffect(()=> {
-        const load = async () => {
-            console.log('entrou 2')
-
-            await findByName(pathname);
+        async function findByName() {
+            let response = await api.get<IFetchData[]>(`name/${pathname}`);
+            let data = response.data[0];
+            
+            console.log(data)
+            const formattedCountry: ICountrie = {
+                name: data.name.common,
+                population: data.population,
+                region: data.region,
+                capital: data.capital,
+                subregion: data.subregion,
+                flag: data.flags.png,
+                // currencies: Object.keys(data.currencies).map(currencie => data.currencies[currencie])
+            };
+            
+            // console.log(formattedCountry)
+            setCountry(formattedCountry)
         }
 
-        load();
+        findByName();
     }, [])
     
     return (
@@ -52,7 +88,7 @@ export function Country({ }) {
                         </li>
                         <li>
                             <strong>Currencies: </strong>
-                            <p>{country.name}</p>
+
                         </li>
                         <li>
                             <strong>Region: </strong>
@@ -65,7 +101,7 @@ export function Country({ }) {
 
                         <li>
                             <strong>Sub Region: </strong>
-                            <p>{country.name}</p>
+                            <p>{country.subregion}</p>
                         </li>
 
                         <li>

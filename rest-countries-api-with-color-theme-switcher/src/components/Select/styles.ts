@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SelectElementContainer = styled.select`
-    width: 120px;
+    width: 150px;
     border: none;
     padding: 1rem;
     background-color: ${({theme}) => theme.base};
