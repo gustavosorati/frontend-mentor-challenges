@@ -1,56 +1,61 @@
 import { ArrowLeft } from "phosphor-react";
-import { useContext, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { api } from "../../api";
 
-import { ContriesContext } from "../../context/CountriesContext";
-import { BorderCountries, Button, CountryContainer, CountryContent, CountryInformations } from "./styles";
+import { BorderCountriesContainer, Button, CountryContainer, CountryContent, CountryInformations } from "./styles";
 
-interface IFetchData {
-    name: {
-        common: string;
-    };
-    population: number;
-    region: string;
-    subregion: string;
-    capital: string[];
-    flags: {
-        png: string;
-    };
-    currencies: {};
-}
 
-interface ICountrie {
-    name: string;
-    population: number;
-    region: string;
-    subregion: string;
+interface ICountry {
+    alpha3Code: string;
+    borders: Array<string>
     capital: string[];
+    currencies: string[];
     flag: string;
-    currencies: {};
+    languages: string[]
+    name: string;
+    nativeName: string;
+    population: number;
+    region: string;
+    subregion: string
+    topLevelDomains: string[];
 }
+
 
 export function Country() {
-    const {pathname} = useLocation();
-    const [country, setCountry]  = useState<ICountrie>({} as ICountrie);
+    const {name} = useParams();    
+    const [country, setCountry]  = useState<ICountry>({} as ICountry);
 
     useEffect(()=> {
         async function findByName() {
-            let response = await api.get<IFetchData[]>(`name/${pathname}`);
+            let response = await api.get(`alpha/${name}`);
             let data = response.data[0];
             
-            console.log(data)
-            const formattedCountry: ICountrie = {
+            let languages = Object.keys(data.languages).map((key : string | any) => {
+                return data.languages[key]
+            }).sort() as []
+
+            let currencies = Object.keys(data.currencies).map((key : string | any) => {
+                return data.currencies[key].name
+            }).sort() as []
+
+            const formattedCountry: ICountry = {
+                alpha3Code: data.alpha3Code,
+                capital: data.capital,
+                currencies: currencies,
+                flag: data.flags.png,
                 name: data.name.common,
+                nativeName: data.name.official,
                 population: data.population,
                 region: data.region,
-                capital: data.capital,
                 subregion: data.subregion,
-                flag: data.flags.png,
-                // currencies: Object.keys(data.currencies).map(currencie => data.currencies[currencie])
-            };
+                
+                languages: languages,
+                borders: data.borders,
+                topLevelDomains: data.tld,
+            } ;
             
-            // console.log(formattedCountry)
+
             setCountry(formattedCountry)
         }
 
@@ -60,7 +65,9 @@ export function Country() {
     return (
         <CountryContainer className="container">
             <Button>
-                <Link to="/">
+                <Link to={{
+                    pathname: '/',
+                }}>
                     <ArrowLeft weight="regular" size={20} />
                     Back
                 </Link>
@@ -76,11 +83,15 @@ export function Country() {
                     <CountryInformations>
                         <li>
                             <strong>Native Name: </strong>
-                            <p>{country.name}</p>
+                            <p>{country.nativeName}</p>
                         </li>
                         <li>
                             <strong>Top Level Domain: </strong>
-                            <p>{country.name}</p>
+                            {country.topLevelDomains && country.topLevelDomains.map(tld => {
+                                return (
+                                    <span key={tld}>{tld}</span>
+                                )
+                            })}
                         </li>
                         <li>
                             <strong>Population: </strong>
@@ -88,7 +99,11 @@ export function Country() {
                         </li>
                         <li>
                             <strong>Currencies: </strong>
-
+                            {country.currencies && country.currencies.map(currencie => {
+                                return (
+                                    <span key={currencie}>{currencie}</span>
+                                )
+                            })}
                         </li>
                         <li>
                             <strong>Region: </strong>
@@ -96,7 +111,11 @@ export function Country() {
                         </li>
                         <li>
                             <strong>Languages: </strong>
-                            <p>{country.name}</p>
+                            {country.languages && country.languages.map(lang => {
+                                return (
+                                    <span key={lang}>{lang}</span>
+                                )
+                            })}
                         </li>
 
                         <li>
@@ -110,9 +129,16 @@ export function Country() {
                         </li>
                     </CountryInformations>
 
-                    <BorderCountries>
+                    <BorderCountriesContainer>
                         <strong>Border Countries</strong>
-                    </BorderCountries>
+                        <div>
+                        {country.borders && country.borders.map(border => {
+                            return (
+                                <span key={border}>{border}</span>
+                            )
+                        })}
+                        </div>
+                    </BorderCountriesContainer>
                 </div>
             </CountryContent> 
             )}

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { CardContainer, BasicInformationContainer} from "./styles";
 
 interface ICountryCard {
+    initials: string;
     name: string;
     population: number;
     region: string;
@@ -12,8 +13,10 @@ interface ICountryCard {
 export function CountryCard(country: ICountryCard) {
     return (
         <CardContainer>
-            <Link to={`${country.name}`}>
-                <img src={country.flag} alt={country.name} />
+            <Link to={`${country.initials}`}>
+                <div>
+                    <img src={country.flag} alt={country.name} />
+                </div>
 
                 <BasicInformationContainer>
                     <h3>{country.name}</h3>

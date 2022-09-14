@@ -10,13 +10,21 @@ export const CardContainer = styled.div`
     max-width: 280px;
     width: 100%;
 
-    img {
-        width: 100%;
-        height: 140px;
-        object-fit: cover;
-        border-radius: 6px 6px 0 0;
+    a {
+        > div {
+            width: 100%;
+            height: 172px;
+        }
 
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 6px 6px 0 0;
+        }
     }
+    
+
+    
 
 `
 

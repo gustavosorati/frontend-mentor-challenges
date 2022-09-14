@@ -67,12 +67,26 @@ export const CountryInformations = styled.div`
 
 `
 
-export const BorderCountries = styled.div`
+export const BorderCountriesContainer = styled.div`
     margin-top: 5rem;
     display: flex;
     align-items: center;
     
+    
     gap: 1rem;
 
+    div {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
 
+        span {
+            background-color: ${({theme}) => theme.base};
+            box-shadow: 0 0px 10px  rgba(0,0,0,.1);
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+
+    }
 `

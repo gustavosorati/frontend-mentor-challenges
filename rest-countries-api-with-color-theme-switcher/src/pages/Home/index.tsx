@@ -1,24 +1,26 @@
-import { useContext, useEffect, useState } from "react";
-import { CountryCard } from "../../components/CountryCard";
+import { useContext } from "react";
+import { CountryCard } from "./components/CountryCard";
 import { CountriesContainer } from "../../components/Header/styles";
-import { InputElement } from "../../components/Input";
-import { SelectElement } from "../../components/Select";
+import { SearchForm } from "./components/SearchForm";
+import { Filter } from "./components/Filter";
 import { ContriesContext } from "../../context/CountriesContext";
-import { FiltersContainer, HomeContainer, Page, PageContainer } from "./styles";
+import { FiltersContainer, HomeContainer } from "./styles";
+import { SpinComponent } from "../../components/Skeleton/SpinComponent";
 
 export function Home() {
-    const { data } = useContext(ContriesContext)
+    const { data, isLoading } = useContext(ContriesContext)
     
     return (
         <HomeContainer className="container">
             
             <FiltersContainer>
-                <InputElement />
+                <SearchForm />
 
-                <SelectElement />
+                <Filter />
             </FiltersContainer>
 
             <CountriesContainer>
+                {isLoading && ( <SpinComponent /> )}
                 {data && data.map(country => {
                     return (
                         <CountryCard 
@@ -28,6 +30,7 @@ export function Home() {
                             population={country.population}
                             flag={country.flag}
                             region={country.region}
+                            initials={country.initials}
                         />
                     )
                 })}

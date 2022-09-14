@@ -1,7 +1,8 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useCallback, useEffect, useState } from "react";
 import { api } from "../api";
 
-interface ICountries {
+interface ICountry {
+    initials: string,
     name: string;
     population: number;
     region: string;
@@ -11,6 +12,7 @@ interface ICountries {
 
 
 interface IFetchData {
+    cca3: string;
     name: {
         common: string;
     };
@@ -23,13 +25,8 @@ interface IFetchData {
 }
 
 interface IContriesContext {
-    data: {
-        name: string;
-        population: number;
-        region: string;
-        capital: string[];
-        flag: string;
-    }[]
+    data: ICountry[];
+    isLoading: boolean;
     findByName: (name: string) => Promise<void>
     findByRegion: (region: string) => Promise<void>
 }
@@ -42,14 +39,26 @@ interface CountriesProviderProps {
 }
 
 export const CountriesProvider = ({children}: CountriesProviderProps) => {
-    const [data, setData] = useState<ICountries[]>([]);
+    const [data, setData] = useState<ICountry[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const {data: d} = await api.get<IFetchData[]>('/all')
+    function sortByName(countries: ICountry[]) {
+        let result = countries.sort((a, b) => {
+            return a.name < b.name ? -1 : (a.name > b.name) ? 1 : 0;
+        });
+
+        return result
+    }
+
+    const fetchCountries = async () => {
+        setIsLoading(true);
+        try {
+            const response = await api.get<IFetchData[]>('/all')
             
-            const obj  = d.map(country => {
-                return {   
+            let countries  = response.data.map(country => {
+                return {
+                    initials: country.cca3,
                     name: country.name.common,
                     population: country.population,
                     region: country.region,
@@ -57,65 +66,83 @@ export const CountriesProvider = ({children}: CountriesProviderProps) => {
                     flag: country.flags.png
                 }
             });
-    
-            setData(obj)
+
+            countries = sortByName(countries);
+       
+            setData(countries);
+        } catch (err: any) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    async function findByName(query?: string) {
+        setIsLoading(true);
+        try {
+            if(query && query.length > 1){
+                let response = await api.get<IFetchData[]>(`name/${query}`);
+                
+                let countries = response.data.map(country => {
+                    return {   
+                        initials: country.cca3,
+                        name: country.name.common,
+                        population: country.population,
+                        region: country.region,
+                        capital: country.capital,
+                        flag: country.flags.png
+                    }
+                });
+
+                countries = sortByName(countries);
+
+
+                setData(countries)
+            } else {
+                await fetchCountries();
+            }
+        }catch (err: any) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    async function findByRegion(query: string) {
+        setIsLoading(true)
+        try{
+            let response = await api.get<IFetchData[]>(`region/${query}`);
+
+            let countries = response.data.map(country => {
+                return {   
+                    initials: country.cca3,
+                    name: country.name.common,
+                    population: country.population,
+                    region: country.region,
+                    capital: country.capital,
+                    flag: country.flags.png
+                }
+            })
+            
+            countries = sortByName(countries);
+
+            setData(countries)
+            setIsLoading(true);
+                
+        }catch (err: any) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
         }
 
-        fetchData();
-    }, []);
-
-    // async function onLoad(){
-    //     const {data: d} = await api.get<IFetchData[]>('/all')
-            
-    //         const obj  = d.map(country => {
-    //             return {   
-    //                 name: country.name.common,
-    //                 population: country.population,
-    //                 region: country.region,
-    //                 capital: country.capital,
-    //                 flag: country.flags.png
-    //             }
-    //         });
-    
-    //         setData(obj)
-    // }
-
-
-    async function findByName(name: string) {
-        let response = await api.get<IFetchData[]>(`name/${name}`);
-
-        const obj  = response.data.map(country => {
-            return {   
-                name: country.name.common,
-                population: country.population,
-                region: country.region,
-                capital: country.capital,
-                flag: country.flags.png
-            }
-        });
-
-        setData(obj)
     }
 
-    async function findByRegion(region: string) {
-        let response = await api.get<IFetchData[]>(`region/${region}`);
-
-        const obj  = response.data.map(country => {
-            return {   
-                name: country.name.common,
-                population: country.population,
-                region: country.region,
-                capital: country.capital,
-                flag: country.flags.png
-            }
-        });
-
-        setData(obj)
-    }
-
+    useEffect(() => {
+        fetchCountries();
+    }, [])
 
     return (
-        <ContriesContext.Provider value={{ data, findByName, findByRegion }}>
+        <ContriesContext.Provider value={{ data, isLoading, findByName, findByRegion }}>
             {children}
         </ContriesContext.Provider>
     )

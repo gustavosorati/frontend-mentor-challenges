@@ -1,17 +1,16 @@
 import { MagnifyingGlass } from "phosphor-react";
 import { ChangeEvent, useContext, useState } from "react";
-import { api } from "../../api";
-import { ContriesContext } from "../../context/CountriesContext";
+import { ContriesContext } from "../../../../context/CountriesContext";
 import { InputElementContainer } from "./styles";
 
-export function InputElement() {
+export function SearchForm() {
     const { findByName } = useContext(ContriesContext)
     const [text, setText] = useState('')
 
 
     async function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
         setText(e.target.value)
-        findByName(e.target.value)
+        await findByName(e.target.value)
     }
 
     return (
