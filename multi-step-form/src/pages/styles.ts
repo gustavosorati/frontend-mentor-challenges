@@ -16,7 +16,6 @@ export const Content = styled.div`
 
   background-color: ${({theme}) => theme.COLORS.white};
   display: flex;
-  align-items: center;
   padding: 1rem;
   border-radius: 1rem;
 
@@ -36,7 +35,6 @@ export const StepController = styled.div`
   flex-direction: column;
   gap: 2rem;
 `;
-
 
 interface StepProps {
   isActive: boolean;
@@ -77,5 +75,12 @@ export const Step = styled.div<StepProps>`
     text-transform: uppercase;
     font-size: .875rem;
   }
+
+`;
+
+export const MultiStepForm = styled.form`
+  flex: 1;
+  padding: 1rem 6rem;
+  overflow: hidden;
 
 `;

@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { FormPersonalInfo } from '../components/Forms/PersonalInfo';
+import { FormPickAddons } from '../components/Forms/PickAddons';
+import { FormSelectPlan } from '../components/Forms/SelectPlan';
 import * as Styled from './styles';
 
 
@@ -29,6 +32,14 @@ export function Home() {
     setSlideIndex(id);
   }
 
+  function nextSlideIndex() {
+    setSlideIndex(prevState => prevState <= 4 ? prevState + 1 : 0);
+  }
+
+  function prevSlideIndex() {
+    setSlideIndex(prevState => prevState >= 1 ? prevState + -1 : 0);
+  }
+
   return (
     <Styled.Container>
       <Styled.Content>
@@ -42,14 +53,15 @@ export function Home() {
               </div>
             </Styled.Step>
           ))}
-
-          <form>
-
-          </form>
-
         </Styled.StepController>
 
+        <Styled.MultiStepForm>
+          {slideIndex === 1 && <FormPersonalInfo onNext={nextSlideIndex} onPrev={prevSlideIndex} />}
+          {slideIndex === 2 && <FormSelectPlan onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
+          {slideIndex === 3 && <FormPickAddons onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
+          {slideIndex === 4 && <FormPersonalInfo onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
 
+        </Styled.MultiStepForm>
       </Styled.Content>
     </Styled.Container>
   );
