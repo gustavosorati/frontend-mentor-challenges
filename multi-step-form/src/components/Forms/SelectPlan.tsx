@@ -1,3 +1,5 @@
+import {useFormContext} from 'react-hook-form';
+
 import { Button } from '../Button/styles';
 import { FormHeader } from '../FormHeader';
 import { PriceInput } from '../Input/PriceInput';
@@ -32,13 +34,16 @@ interface Form {
 
 
 export function FormSelectPlan({onNext, onPrev}: Form) {
+  const {register,watch} = useFormContext();
+
+  console.log(watch('plan'));
   return (
     <Styled.Container>
       <FormHeader title='Select your plan' subtitle='You have the option of monthly or yearly billing.' />
 
       <Styled.InputPriceContainer>
         {inputs.map(el => (
-          <PriceInput key={el.title} image={el.image_path} title={el.title} price={el.price} />
+          <PriceInput key={el.title} image={el.image_path} title={el.title} price={el.price} {...register('plan')} />
         ))}
       </Styled.InputPriceContainer>
 

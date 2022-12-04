@@ -68,7 +68,7 @@ export const PriceInputContainer = styled.label`
   }
 `;
 
-export const AddonsInputContainer = styled.div`
+export const AddonsInputContainer = styled.label`
   width: 100%;
 
   display: flex;

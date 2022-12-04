@@ -1,17 +1,17 @@
+import { forwardRef } from 'react';
 import * as Styled from './styles';
 
 interface AddonsInputProps {
-  name: string;
   title: string;
   description: string;
   price: string;
 }
 
-export function AddonsInput({name, title, description, price}: AddonsInputProps) {
+export const AddonsInput = forwardRef<HTMLInputElement, AddonsInputProps>(({title, description, price, ...props}: AddonsInputProps, ref) => {
   return (
     <Styled.AddonsInputContainer>
 
-      <input type="checkbox" name="addons" id="addons" checked />
+      <input type="checkbox" name="addons" id="addons" {...props} ref={ref} />
 
       <div className="services">
         <strong>{title}</strong>
@@ -21,4 +21,4 @@ export function AddonsInput({name, title, description, price}: AddonsInputProps)
       <span className='price'>${price}/mo</span>
     </Styled.AddonsInputContainer>
   );
-}
+});

@@ -1,4 +1,5 @@
 
+import { forwardRef } from 'react';
 import * as Styled from './styles';
 
 interface PriceInputProps {
@@ -7,9 +8,12 @@ interface PriceInputProps {
   price: string;
 }
 
-export function PriceInput({image,title, price}: PriceInputProps) {
+export const PriceInput = forwardRef<HTMLInputElement, PriceInputProps>(({image,title, price, ...props}: PriceInputProps, ref) => {
+
   return (
     <Styled.PriceInputContainer>
+      <input type="radio" name="plano" value={title} ref={ref} {...props} />
+
       <img src={image} />
 
       <footer>
@@ -18,4 +22,4 @@ export function PriceInput({image,title, price}: PriceInputProps) {
       </footer>
     </Styled.PriceInputContainer>
   );
-}
+});

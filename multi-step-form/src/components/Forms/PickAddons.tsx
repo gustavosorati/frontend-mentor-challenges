@@ -1,3 +1,5 @@
+import {useFormContext} from 'react-hook-form';
+
 import { Button } from '../Button/styles';
 import { FormHeader } from '../FormHeader';
 import { AddonsInput } from '../Input/AddonsInput';
@@ -9,13 +11,31 @@ interface Form {
 }
 
 export function FormPickAddons({onNext, onPrev}: Form) {
+  const {register, watch} = useFormContext();
+
+  console.log(watch('addons'));
   return (
     <Styled.Container>
       <FormHeader title='Pick add-ons' subtitle='Add-ons help enhance your gaming experience.' />
 
-      <AddonsInput name="online-service" title='Online serice' description='Acess to multiplayer games' price='1' />
-      <AddonsInput name="larger-storage" title='Larger storage' description='Extra 1TB of cloud save' price='2' />
-      <AddonsInput name="custom-profile" title='Customizable Profile' description='Custom theme on your profile' price='2' />
+      <AddonsInput
+        title='Online serice'
+        description='Acess to multiplayer games'
+        price='1'
+        {...register('addons.onlineService')}
+      />
+      <AddonsInput
+        title='Larger storage'
+        description='Extra 1TB of cloud save'
+        price='2'
+        {...register('addons.largerStorage')}
+      />
+      <AddonsInput
+        title='Customizable Profile'
+        description='Custom theme on your profile'
+        price='2'
+        {...register('addons.customProfile')}
+      />
 
 
       <Styled.Footer>
