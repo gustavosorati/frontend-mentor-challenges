@@ -52,7 +52,7 @@ export const Step = styled.div<StepProps>`
     height: 30px;
     border-radius: 15px;
     background-color: ${({theme, isActive}) => isActive ? theme.COLORS['blue-light'] : 'transparent'};
-    border: 1px solid ${({theme}) => theme.COLORS['white']};;
+    border: 1px solid ${({theme}) => theme.COLORS['white']};
 
     display: flex;
     align-items: center;
@@ -60,7 +60,7 @@ export const Step = styled.div<StepProps>`
 
     font-size: 0.875rem;
     font-weight: ${({theme}) => theme['FONT-WEIGHT'][700]};
-    color: ${({theme}) => theme.COLORS['blue-marine']};
+    color: ${({theme, isActive}) => isActive ? theme.COLORS['blue-marine']:  theme.COLORS['white']};
   }
 
   strong {

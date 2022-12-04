@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FormFinishingUp } from '../components/Forms/FinishingUp';
 import { FormPersonalInfo } from '../components/Forms/PersonalInfo';
 import { FormPickAddons } from '../components/Forms/PickAddons';
 import { FormSelectPlan } from '../components/Forms/SelectPlan';
@@ -59,8 +60,7 @@ export function Home() {
           {slideIndex === 1 && <FormPersonalInfo onNext={nextSlideIndex} onPrev={prevSlideIndex} />}
           {slideIndex === 2 && <FormSelectPlan onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
           {slideIndex === 3 && <FormPickAddons onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
-          {slideIndex === 4 && <FormPersonalInfo onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
-
+          {slideIndex === 4 && <FormFinishingUp onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
         </Styled.MultiStepForm>
       </Styled.Content>
     </Styled.Container>

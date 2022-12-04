@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components';
 
 interface ButtonProps {
+  type?: string;
   variant?: 'PRIMARY' | 'SECONDARY';
 }
 
-export const Button = styled.button.attrs<ButtonProps>(({variant}) => ({
-  type: 'button',
+export const Button = styled.button.attrs<ButtonProps>(({variant, type}) => ({
+  type: type ? type : 'button',
   variant: variant
 }))<ButtonProps>`
   width: 120px;
