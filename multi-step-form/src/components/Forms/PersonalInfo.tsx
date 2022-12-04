@@ -1,6 +1,6 @@
 import { Button } from '../Button/styles';
 import { FormHeader } from '../FormHeader';
-import { BaseInput } from '../Input';
+import { BaseInput } from '../Input/BaseInput';
 import * as Styled from './styles';
 
 export function FormPersonalInfo() {
