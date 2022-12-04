@@ -3,13 +3,13 @@ import styled, { keyframes } from 'styled-components';
 const animation = keyframes`
   from {
     transform: translateX(-100%);
+    opacity: 0;
   }
   to {
     transform: translateY(0);
+    opacity: 1;
   }
 `;
-
-
 
 export const Container = styled.div`
   width: 100%;

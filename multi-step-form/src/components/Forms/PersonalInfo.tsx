@@ -3,7 +3,13 @@ import { FormHeader } from '../FormHeader';
 import { BaseInput } from '../Input/BaseInput';
 import * as Styled from './styles';
 
-export function FormPersonalInfo() {
+interface Form {
+  onNext: () => void;
+  onPrev: () => void;
+}
+
+
+export function FormPersonalInfo({onNext, onPrev}: Form) {
   return (
     <Styled.Container>
       <FormHeader title='Personal Info' subtitle='Please provide your name, email address, and phone number.' />
@@ -14,7 +20,7 @@ export function FormPersonalInfo() {
 
       <Styled.Footer>
         <div />
-        <Button>Next Step</Button>
+        <Button onClick={onNext}>Next Step</Button>
       </Styled.Footer>
     </Styled.Container>
   );

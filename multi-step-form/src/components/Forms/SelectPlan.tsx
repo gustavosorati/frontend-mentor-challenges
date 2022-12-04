@@ -25,9 +25,13 @@ const inputs = [
   },
 ];
 
+interface Form {
+  onNext: () => void;
+  onPrev: () => void;
+}
 
 
-export function FormSelectPlan() {
+export function FormSelectPlan({onNext, onPrev}: Form) {
   return (
     <Styled.Container>
       <FormHeader title='Select your plan' subtitle='You have the option of monthly or yearly billing.' />
@@ -43,8 +47,8 @@ export function FormSelectPlan() {
       </Styled.MonthlyPayment>
 
       <Styled.Footer>
-        <Button variant="SECONDARY">Go Back</Button>
-        <Button variant="PRIMARY">Next Step</Button>
+        <Button onClick={onPrev}>Go Back</Button>
+        <Button onClick={onNext}>Next Step</Button>
       </Styled.Footer>
     </Styled.Container>
   );
