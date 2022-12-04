@@ -20,7 +20,7 @@ export function FormPersonalInfo({onNext, onPrev}: Form) {
 
       <Styled.Footer>
         <div />
-        <Button onClick={onNext}>Next Step</Button>
+        <Button onClick={onNext} variant="PRIMARY">Next Step</Button>
       </Styled.Footer>
     </Styled.Container>
   );

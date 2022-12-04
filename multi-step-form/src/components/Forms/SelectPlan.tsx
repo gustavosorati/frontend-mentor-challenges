@@ -47,8 +47,8 @@ export function FormSelectPlan({onNext, onPrev}: Form) {
       </Styled.MonthlyPayment>
 
       <Styled.Footer>
-        <Button onClick={onPrev}>Go Back</Button>
-        <Button onClick={onNext}>Next Step</Button>
+        <Button onClick={onPrev} variant="SECONDARY">Go Back</Button>
+        <Button onClick={onNext} variant="PRIMARY">Next Step</Button>
       </Styled.Footer>
     </Styled.Container>
   );

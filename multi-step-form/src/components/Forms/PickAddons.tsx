@@ -19,8 +19,8 @@ export function FormPickAddons({onNext, onPrev}: Form) {
 
 
       <Styled.Footer>
-        <Button onClick={onPrev}>Go Back</Button>
-        <Button onClick={onNext}>Next Step</Button>
+        <Button onClick={onPrev} variant="SECONDARY">Go Back</Button>
+        <Button onClick={onNext} variant="PRIMARY">Next Step</Button>
       </Styled.Footer>
     </Styled.Container>
   );
