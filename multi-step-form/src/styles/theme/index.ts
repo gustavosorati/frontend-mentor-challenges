@@ -1,4 +1,4 @@
-export default {
+export const defaultTheme = {
   COLORS: {
     'blue-marine': 'hsl(213, 96%, 18%)',
     'blue-purplish': 'hsl(243, 100%, 62%)',
@@ -17,4 +17,4 @@ export default {
     '500': 500,
     '700': 700,
   }
-};
+} as const;
