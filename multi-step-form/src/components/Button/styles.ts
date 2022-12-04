@@ -1,13 +1,12 @@
-import { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
 interface ButtonProps {
   variant?: 'PRIMARY' | 'SECONDARY';
 }
 
-export const Button = styled.button.attrs<ButtonProps>((props) => ({
+export const Button = styled.button.attrs<ButtonProps>(({variant}) => ({
   type: 'button',
-  variant: 'PRIMARY'
+  variant: variant
 }))<ButtonProps>`
   width: 120px;
   display: flex;
@@ -18,9 +17,8 @@ export const Button = styled.button.attrs<ButtonProps>((props) => ({
   justify-content: '';
   font-weight: ${({theme}) => theme['FONT-WEIGHT'][700]};
   color: ${({theme}) => theme.COLORS['gray-cool']};
-  background-color: 'transparent';
-  border-color: 'transparent';
-
+  background-color: transparent;
+  border-color: transparent;
 
   ${({theme, variant}) => variant === 'PRIMARY' && css`
     justify-content: center;
