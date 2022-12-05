@@ -7,6 +7,7 @@ import * as Styled from './styles';
 import arcade from '../../assets/images/icon-arcade.svg';
 import advanced from '../../assets/images/icon-advanced.svg';
 import pro from '../../assets/images/icon-pro.svg';
+import { RenovationInput } from '../Input/RenovationInput';
 
 
 const inputs = [
@@ -54,6 +55,8 @@ export function FormSelectPlan({onNext, onPrev}: Form) {
 
       <Styled.MonthlyPayment>
         <span>Monthly</span>
+        <RenovationInput />
+        <span>Yearly</span>
       </Styled.MonthlyPayment>
 
       <Styled.Footer>

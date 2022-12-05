@@ -31,6 +31,7 @@ export const MonthlyPayment = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 2rem;
   background-color: ${({theme}) => theme.COLORS['alabaster']};
   border-radius: 8px;
 

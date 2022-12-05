@@ -87,7 +87,7 @@ export function Home() {
     console.log(data);
   }
 
-  console.log(methods.formState.errors);
+  // console.log(methods.formState.errors);
   return (
     <Styled.Container>
       <Styled.Content>
