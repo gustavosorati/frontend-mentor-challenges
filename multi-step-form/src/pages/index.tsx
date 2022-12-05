@@ -42,7 +42,7 @@ const schema = yup.object({
   email: yup.string().email().required('This field is Required'),
   phone: yup.string().required('This field is Required'),
   plan: yup.string().required(),
-  renovation: yup.string().required(),
+  renovation: yup.string(),
   addons: yup.object().shape({
     onlineService: yup.boolean(),
     largerStorage: yup.boolean(),
@@ -54,8 +54,20 @@ const schema = yup.object({
 
 export function Home() {
   const [slideIndex, setSlideIndex] = useState(1);
-  const methods = useForm<FormProps>({
-    resolver: yupResolver(schema)
+  const methods = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      name: '',
+      email: '',
+      phone: '',
+      plan: 'Arcade',
+      renovation: 'monthly',
+      addons: {
+        onlineService: false,
+        largerStorage: false,
+        customProfile: false
+      }
+    }
   });
 
   function handleChangeSlideIndex(id: number) {
@@ -70,11 +82,12 @@ export function Home() {
     setSlideIndex(prevState => prevState >= 1 ? prevState + -1 : 0);
   }
 
-  function submitForm(data: FormProps) {
+  function submitForm(data: any) {
     console.log('entrou');
     console.log(data);
   }
 
+  console.log(methods.formState.errors);
   return (
     <Styled.Container>
       <Styled.Content>

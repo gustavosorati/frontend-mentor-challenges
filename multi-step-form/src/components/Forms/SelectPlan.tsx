@@ -34,16 +34,21 @@ interface Form {
 
 
 export function FormSelectPlan({onNext, onPrev}: Form) {
-  const {register,watch} = useFormContext();
+  const {register, watch} = useFormContext();
 
-  console.log(watch('plan'));
+  // console.log(watch('plan'));
   return (
     <Styled.Container>
       <FormHeader title='Select your plan' subtitle='You have the option of monthly or yearly billing.' />
-
       <Styled.InputPriceContainer>
         {inputs.map(el => (
-          <PriceInput key={el.title} image={el.image_path} title={el.title} price={el.price} {...register('plan')} />
+          <PriceInput
+            key={el.title}
+            image={el.image_path}
+            title={el.title}
+            price={el.price}
+            {...register('plan')}
+          />
         ))}
       </Styled.InputPriceContainer>
 

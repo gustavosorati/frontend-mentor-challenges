@@ -11,16 +11,15 @@ interface Form {
 }
 
 export function FormPickAddons({onNext, onPrev}: Form) {
-  const {register, watch} = useFormContext();
+  const {register} = useFormContext();
 
-  console.log(watch('addons'));
   return (
     <Styled.Container>
       <FormHeader title='Pick add-ons' subtitle='Add-ons help enhance your gaming experience.' />
 
       <AddonsInput
-        title='Online serice'
-        description='Acess to multiplayer games'
+        title='Online service'
+        description='Access to multiplayer games'
         price='1'
         {...register('addons.onlineService')}
       />

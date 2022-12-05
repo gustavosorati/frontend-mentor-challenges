@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
+interface InputProps {
+  error?: string;
+}
 
-export const BaseInputContainer = styled.label`
+export const BaseInputContainer = styled.label<InputProps>`
   width: 100%;
+  position: relative;
 
   p {
     margin-bottom: .5rem;
@@ -18,8 +22,9 @@ export const BaseInputContainer = styled.label`
     font-weight: ${({theme}) => theme['FONT-WEIGHT'][700]};
     font-size: 1rem;
     border-radius: 8px;
-    border: 1.5px solid ${({theme}) => theme.COLORS['gray-light']};
     outline: none;
+
+    border: 1.5px solid ${({theme, error}) => error ? theme.COLORS['red-strawberry'] : theme.COLORS['gray-light']};
 
     &::placeholder {
       color: ${({theme}) => theme.COLORS['gray-cool']};
@@ -29,21 +34,48 @@ export const BaseInputContainer = styled.label`
       border-color: ${({theme}) => theme.COLORS['blue-purplish']};
     }
   }
+
+  .error {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    color: ${({theme}) => theme.COLORS['red-strawberry']};
+    font-weight: ${({theme}) => theme['FONT-WEIGHT'][700]};
+    font-size: .875rem;
+  }
 `;
 
-export const PriceInputContainer = styled.label`
+interface PriceInputContainerProps {
+  error?: string;
+  checked: boolean;
+}
+
+export const PriceInputContainer = styled.label<PriceInputContainerProps>`
+  position: relative;
   width: 140px;
   display: flex;
   flex-direction: column;
   padding: 1rem;
 
   border-radius: 8px;
-  border: 1.5px solid ${({theme}) => theme.COLORS['gray-light']};
   background-color: transparent;
   cursor: pointer;
 
+  border: 1.5px solid ${({checked, theme}) => checked ? theme.COLORS['blue-purplish'] : theme.COLORS['gray-light']};
+  background-color: ${({checked, theme}) => checked ? theme.COLORS['magnolia'] : 'transparent'};
+
+
   &:hover {
     border-color: ${({theme}) => theme.COLORS['blue-purplish']};
+  }
+
+
+  input {
+    visibility: hidden;
+    opacity: 0;
+    width: 0px;
+    height: 0px;
   }
 
   img {
@@ -66,9 +98,23 @@ export const PriceInputContainer = styled.label`
       font-weight: ${({theme}) => theme['FONT-WEIGHT'][500]};
     }
   }
+
+  .error {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    color: ${({theme}) => theme.COLORS['red-strawberry']};
+    font-weight: ${({theme}) => theme['FONT-WEIGHT'][700]};
+    font-size: .875rem;
+  }
 `;
 
-export const AddonsInputContainer = styled.label`
+interface AddonsInputContainerProps {
+  checked?: boolean;
+}
+
+export const AddonsInputContainer = styled.label<AddonsInputContainerProps>`
   width: 100%;
 
   display: flex;
@@ -79,8 +125,10 @@ export const AddonsInputContainer = styled.label`
 
   background-color: transparent;
   border-radius: 8px;
-  border: 1.5px solid ${({theme}) => theme.COLORS['gray-light']};
+
   cursor: pointer;
+
+  border: 1.5px solid ${({theme, checked}) => checked ? theme.COLORS['blue-purplish'] : theme.COLORS['gray-light']};
 
   &:hover {
     border-color: ${({theme}) => theme.COLORS['blue-purplish']};
@@ -106,3 +154,4 @@ export const AddonsInputContainer = styled.label`
     color: ${({theme}) => theme.COLORS['blue-purplish']};
   }
 `;
+
