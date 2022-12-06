@@ -1,27 +1,46 @@
-import {useFormContext} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
+import { useCart } from '../../hooks/useCart';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
 import { Button } from './Button/styles';
 import { FormHeader } from './FormHeader';
 import { BaseInput } from './Input/BaseInput';
+
 import * as Styled from './styles';
 
-interface Form {
+interface Props {
   onNext: () => void;
   onPrev: () => void;
 }
 
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+}
 
-export function FormPersonalInfo({onNext, onPrev}: Form) {
-  const {register, formState: { errors, isValid }} = useFormContext();
+const schema = yup.object({
+  name: yup.string().required('This field is Required'),
+  email: yup.string().email().required('This field is Required'),
+  phone: yup.string().required('This field is Required'),
+});
 
-  function handleNextSlide() {
-    if(errors){
-      console.log(isValid);
+export function FormPersonalInfo({onNext, onPrev}: Props) {
+  const {update} = useCart();
 
-    }
+  const {register, formState: { errors, isValid }, handleSubmit, watch} = useForm<FormData>({
+    resolver: yupResolver(schema)
+  });
+
+  function handleNextSlide(data: FormData) {
+    update(data);
+    onNext();
   }
 
+  // console.log(watch('name'));
   return (
-    <Styled.Container>
+    <Styled.Container onSubmit={handleSubmit(handleNextSlide)}>
       <FormHeader title='Personal Info' subtitle='Please provide your name, email address, and phone number.' />
 
       <BaseInput
@@ -48,7 +67,7 @@ export function FormPersonalInfo({onNext, onPrev}: Form) {
 
       <Styled.Footer>
         <div />
-        <Button onClick={handleNextSlide} variant="PRIMARY">Next Step</Button>
+        <Button type="submit" variant="PRIMARY">Next Step</Button>
       </Styled.Footer>
     </Styled.Container>
   );

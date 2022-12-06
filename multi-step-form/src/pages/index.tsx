@@ -3,8 +3,6 @@ import { FormFinishingUp } from '../components/Forms/FinishingUp';
 import { FormPersonalInfo } from '../components/Forms/PersonalInfo';
 import { FormPickAddons } from '../components/Forms/PickAddons';
 import { FormSelectPlan } from '../components/Forms/SelectPlan';
-import { FormProvider, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import * as Styled from './styles';
@@ -38,9 +36,6 @@ interface FormProps {
 }
 
 const schema = yup.object({
-  name: yup.string().required('This field is Required'),
-  email: yup.string().email().required('This field is Required'),
-  phone: yup.string().required('This field is Required'),
   plan: yup.string().required(),
   renovation: yup.string(),
   addons: yup.object().shape({
@@ -48,27 +43,10 @@ const schema = yup.object({
     largerStorage: yup.boolean(),
     customProfile: yup.boolean(),
   }),
-
-
 });
 
 export function Home() {
   const [slideIndex, setSlideIndex] = useState(1);
-  const methods = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      name: '',
-      email: '',
-      phone: '',
-      // plan: 'Arcade',
-      // renovation: 'monthly',
-      // addons: {
-      //   onlineService: false,
-      //   largerStorage: false,
-      //   customProfile: false
-      // }
-    }
-  });
 
   function handleChangeSlideIndex(id: number) {
     setSlideIndex(id);
@@ -87,7 +65,6 @@ export function Home() {
     console.log(data);
   }
 
-  // console.log(methods.formState.errors);
   return (
     <Styled.Container>
       <Styled.Content>
@@ -103,14 +80,14 @@ export function Home() {
           ))}
         </Styled.StepController>
 
-        <FormProvider {...methods}>
-          <Styled.MultiStepForm onSubmit={methods.handleSubmit(submitForm)}>
-            {slideIndex === 1 && <FormPersonalInfo onNext={nextSlideIndex} onPrev={prevSlideIndex} />}
-            {slideIndex === 2 && <FormSelectPlan onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
-            {slideIndex === 3 && <FormPickAddons onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
-            {slideIndex === 4 && <FormFinishingUp onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
-          </Styled.MultiStepForm>
-        </FormProvider>
+        {/* <FormProvider {...methods}> */}
+        <Styled.MultiStepForm>
+          {slideIndex === 1 && <FormPersonalInfo onNext={nextSlideIndex} onPrev={prevSlideIndex} />}
+          {slideIndex === 2 && <FormSelectPlan onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
+          {slideIndex === 3 && <FormPickAddons onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
+          {slideIndex === 4 && <FormFinishingUp onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
+        </Styled.MultiStepForm>
+        {/* </FormProvider> */}
       </Styled.Content>
     </Styled.Container>
   );

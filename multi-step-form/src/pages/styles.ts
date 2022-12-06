@@ -75,10 +75,9 @@ export const Step = styled.div<StepProps>`
     text-transform: uppercase;
     font-size: .875rem;
   }
-
 `;
 
-export const MultiStepForm = styled.form`
+export const MultiStepForm = styled.div`
   flex: 1;
   padding: 1rem 6rem;
   overflow: hidden;
