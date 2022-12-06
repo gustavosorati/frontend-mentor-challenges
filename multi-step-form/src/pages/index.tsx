@@ -60,13 +60,13 @@ export function Home() {
       name: '',
       email: '',
       phone: '',
-      plan: 'Arcade',
-      renovation: 'monthly',
-      addons: {
-        onlineService: false,
-        largerStorage: false,
-        customProfile: false
-      }
+      // plan: 'Arcade',
+      // renovation: 'monthly',
+      // addons: {
+      //   onlineService: false,
+      //   largerStorage: false,
+      //   customProfile: false
+      // }
     }
   });
 

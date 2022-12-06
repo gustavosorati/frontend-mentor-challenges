@@ -11,7 +11,14 @@ interface Form {
 
 
 export function FormPersonalInfo({onNext, onPrev}: Form) {
-  const {register, formState: { errors }} = useFormContext();
+  const {register, formState: { errors, isValid }} = useFormContext();
+
+  function handleNextSlide() {
+    if(errors){
+      console.log(isValid);
+
+    }
+  }
 
   return (
     <Styled.Container>
@@ -41,7 +48,7 @@ export function FormPersonalInfo({onNext, onPrev}: Form) {
 
       <Styled.Footer>
         <div />
-        <Button onClick={onNext} variant="PRIMARY">Next Step</Button>
+        <Button onClick={handleNextSlide} variant="PRIMARY">Next Step</Button>
       </Styled.Footer>
     </Styled.Container>
   );
