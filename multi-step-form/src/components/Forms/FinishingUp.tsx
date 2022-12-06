@@ -1,5 +1,5 @@
-import { Button } from '../Button/styles';
-import { FormHeader } from '../FormHeader';
+import { Button } from './Button/styles';
+import { FormHeader } from './FormHeader';
 import * as Styled from './styles';
 
 interface Form {

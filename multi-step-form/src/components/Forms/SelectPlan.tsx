@@ -1,13 +1,13 @@
 import {useFormContext} from 'react-hook-form';
 
-import { Button } from '../Button/styles';
-import { FormHeader } from '../FormHeader';
-import { PriceInput } from '../Input/PriceInput';
+import { Button } from './Button/styles';
+import { FormHeader } from './FormHeader';
+import { PriceInput } from './Input/PriceInput';
 import * as Styled from './styles';
 import arcade from '../../assets/images/icon-arcade.svg';
 import advanced from '../../assets/images/icon-advanced.svg';
 import pro from '../../assets/images/icon-pro.svg';
-import { RenovationInput } from '../Input/RenovationInput';
+import { RenovationInput } from './Input/RenovationInput';
 
 
 const inputs = [
@@ -32,7 +32,6 @@ interface Form {
   onNext: () => void;
   onPrev: () => void;
 }
-
 
 export function FormSelectPlan({onNext, onPrev}: Form) {
   const {register, watch} = useFormContext();

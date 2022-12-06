@@ -18,10 +18,6 @@ export function RenovationInput() {
     }
   }
 
-  // useEffect(() => {
-  //   console.log(renovation);
-  // }, [renovation]);
-
   return (
     <Styled.RenovationInput>
       <input

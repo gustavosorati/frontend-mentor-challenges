@@ -1,8 +1,8 @@
 import {useFormContext} from 'react-hook-form';
 
-import { Button } from '../Button/styles';
-import { FormHeader } from '../FormHeader';
-import { AddonsInput } from '../Input/AddonsInput';
+import { Button } from './Button/styles';
+import { FormHeader } from './FormHeader';
+import { AddonsInput } from './Input/AddonsInput';
 import * as Styled from './styles';
 
 interface Form {
