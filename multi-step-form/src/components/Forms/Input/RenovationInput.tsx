@@ -1,32 +1,33 @@
-import { useEffect, useRef, useState } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { useCart } from '../../../hooks/useCart';
 import * as Styled from './styles';
 
-type Renovation = 'monthly' | 'yearly';
+// type Renovation = 'monthly' | 'yearly';
 
-export function RenovationInput() {
-  const [renovation, setRenovation] = useState<Renovation>('monthly');
+export const  RenovationInput = forwardRef<HTMLInputElement>(({...props }, ref) => {
+  const {data, update} = useCart();
+  const {watch ,setValue} = useFormContext();
   const innerRef = useRef<HTMLInputElement>(null);
+
+  useImperativeHandle(ref, () => innerRef.current!);
 
   function handleTypeRenovation() {
     const input = innerRef.current;
-    if(input){
-      if(input.checked) {
-        setRenovation('yearly');
-      } else {
-        setRenovation('monthly');
-      }
-    }
+
+    update({typeRenovation: input?.checked});
   }
 
   return (
     <Styled.RenovationInput>
       <input
         type="checkbox"
-        value="yearly"
-        onChange={handleTypeRenovation}
         ref={innerRef}
+        {...props}
+        // defaultChecked={data.typeRenovation}
+        onClick={handleTypeRenovation}
       />
       <span className="slider round"></span>
     </Styled.RenovationInput>
   );
-}
+});

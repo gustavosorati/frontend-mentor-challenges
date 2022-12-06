@@ -1,67 +1,110 @@
-import {useFormContext} from 'react-hook-form';
+import {useForm, FormProvider} from 'react-hook-form';
+import { useCart } from '../../hooks/useCart';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 import { Button } from './Button/styles';
 import { FormHeader } from './FormHeader';
-import { PriceInput } from './Input/PriceInput';
-import * as Styled from './styles';
-import arcade from '../../assets/images/icon-arcade.svg';
-import advanced from '../../assets/images/icon-advanced.svg';
-import pro from '../../assets/images/icon-pro.svg';
+import { PlanInput } from './Input/PlanInput';
 import { RenovationInput } from './Input/RenovationInput';
 
+import * as Styled from './styles';
 
-const inputs = [
-  {
-    image_path: arcade,
-    title: 'Arcade',
-    price: '9'
-  },
-  {
-    image_path: advanced,
-    title: 'Advanced',
-    price: '9'
-  },
-  {
-    image_path: pro,
-    title: 'Pro',
-    price: '15'
-  },
-];
+import schema from '../../../schema.json';
 
-interface Form {
+interface Props {
   onNext: () => void;
   onPrev: () => void;
 }
 
-export function FormSelectPlan({onNext, onPrev}: Form) {
-  const {register, watch} = useFormContext();
+const schemaValidation = yup.object({
+  plan: yup.string().required(),
+  typeRenovation: yup.boolean()
+});
 
-  // console.log(watch('plan'));
+export function FormSelectPlan({onNext, onPrev}: Props) {
+  const {data, update} = useCart();
+  const methods = useForm({
+    resolver: yupResolver(schemaValidation),
+    defaultValues: {
+      plan: data.plan?.type ? data.plan.type : 'Arcade',
+      typeRenovation: data.typeRenovation ? data.typeRenovation : false,
+    }
+  });
+  const selectedTypeRenovation = methods.watch('typeRenovation');
+
+  function handleChangePlan(data: any) {
+    const selectedData = data.typeRenovation === true
+      ? schema.planos.anual.find(bd => {
+        if(bd.title === data.plan) {
+          return bd;
+        }
+      }) : schema.planos.mensal.find(bd => {
+        if(bd.title === data.plan) {
+          return bd;
+        }
+      });
+
+    update({
+      plan: {
+        type: data.plan,
+        price: selectedData?.price
+      },
+      typeRenovation: data.typeRenovation
+    });
+  }
+
+
+  console.log(selectedTypeRenovation);
   return (
-    <Styled.Container>
-      <FormHeader title='Select your plan' subtitle='You have the option of monthly or yearly billing.' />
-      <Styled.InputPriceContainer>
-        {inputs.map(el => (
-          <PriceInput
-            key={el.title}
-            image={el.image_path}
-            title={el.title}
-            price={el.price}
-            {...register('plan')}
+    <FormProvider {...methods}>
+      <Styled.Container onSubmit={methods.handleSubmit(handleChangePlan)}>
+        <FormHeader title='Select your plan' subtitle='You have the option of monthly or yearly billing.' />
+
+        {/* Tipo de Plano */}
+        <Styled.InputPriceContainer>
+          {selectedTypeRenovation && (
+            <>
+              {schema.planos.anual.map(el => (
+                <PlanInput
+                  key={el.title}
+                  image={el.image_path}
+                  title={el.title}
+                  price={el.price}
+                  {...methods.register('plan')}
+                />
+              ))}
+            </>
+          )}
+          {!selectedTypeRenovation && (
+            <>
+              {schema.planos.mensal.map(el => (
+                <PlanInput
+                  key={el.title}
+                  image={el.image_path}
+                  title={el.title}
+                  price={el.price}
+                  {...methods.register('plan')}
+                />
+              ))}
+            </>
+          )}
+        </Styled.InputPriceContainer>
+
+        {/* Tipo de Renovação */}
+        <Styled.MonthlyPayment>
+          <span>Monthly</span>
+          <RenovationInput
+            {...methods.register('typeRenovation')}
           />
-        ))}
-      </Styled.InputPriceContainer>
+          <span>Yearly</span>
+        </Styled.MonthlyPayment>
 
-      <Styled.MonthlyPayment>
-        <span>Monthly</span>
-        <RenovationInput />
-        <span>Yearly</span>
-      </Styled.MonthlyPayment>
-
-      <Styled.Footer>
-        <Button onClick={onPrev} variant="SECONDARY">Go Back</Button>
-        <Button onClick={onNext} variant="PRIMARY">Next Step</Button>
-      </Styled.Footer>
-    </Styled.Container>
+        <Styled.Footer>
+          <Button onClick={onPrev} variant="SECONDARY">Go Back</Button>
+          <Button type="submit" variant="PRIMARY">Next Step</Button>
+        </Styled.Footer>
+      </Styled.Container>
+    </FormProvider>
   );
 }

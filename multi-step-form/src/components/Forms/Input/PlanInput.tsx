@@ -1,21 +1,29 @@
 
 import {useFormContext} from 'react-hook-form';
-import { forwardRef, InputHTMLAttributes, useEffect, useState } from 'react';
+import { forwardRef, InputHTMLAttributes, useEffect, useRef, useState } from 'react';
 import * as Styled from './styles';
+import { useCart } from '../../../hooks/useCart';
 
-interface PriceInputProps extends InputHTMLAttributes<HTMLInputElement>{
+interface Props extends InputHTMLAttributes<HTMLInputElement>{
   image: string;
   title: string;
   price: string;
 }
 
-export const PriceInput = forwardRef<HTMLInputElement, PriceInputProps>(({image, title, price, ...props}: PriceInputProps, ref) => {
-  const {watch ,getValues} = useFormContext();
+export const PlanInput = forwardRef<HTMLInputElement, Props>(({
+  image,
+  title,
+  price,
+  ...props
+}: Props,
+ref) => {
+  const {data, update} = useCart();
   const [isChecked, setChecked] = useState(false);
 
-  function setWhereIsChecked() {
-    const variavel = getValues('plan');
+  const {register, watch, getValues} = useFormContext();
 
+  function setWhichInputIsChecked() {
+    const variavel = getValues('plan');
     if(title === variavel){
       setChecked(true);
     } else {
@@ -24,15 +32,15 @@ export const PriceInput = forwardRef<HTMLInputElement, PriceInputProps>(({image,
   }
 
   useEffect(() => {
-    setWhereIsChecked();
+    setWhichInputIsChecked();
   }, [watch('plan')]);
 
   return (
     <Styled.PriceInputContainer checked={isChecked}>
       <input
+        ref={ref}
         type="radio"
         name="plano"
-        ref={ref}
         value={title}
         {...props}
       />
@@ -47,3 +55,4 @@ export const PriceInput = forwardRef<HTMLInputElement, PriceInputProps>(({image,
     </Styled.PriceInputContainer>
   );
 });
+

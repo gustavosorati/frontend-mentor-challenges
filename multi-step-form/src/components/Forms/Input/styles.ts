@@ -48,7 +48,7 @@ export const BaseInputContainer = styled.label<InputProps>`
 
 interface PriceInputContainerProps {
   error?: string;
-  checked: boolean;
+  checked?: boolean;
 }
 
 export const PriceInputContainer = styled.label<PriceInputContainerProps>`
@@ -71,12 +71,12 @@ export const PriceInputContainer = styled.label<PriceInputContainerProps>`
   }
 
 
-  input {
+  /* input {
     visibility: hidden;
     opacity: 0;
     width: 0px;
     height: 0px;
-  }
+  } */
 
   img {
     margin-bottom: 3rem;

@@ -47,8 +47,9 @@ export function FormPersonalInfo({onNext, onPrev}: Props) {
         placeholder='john doe'
         title='Name'
         type="text"
+        defaultValue={data.name}
+        // value={datdsa.name}
         {...register('name')}
-        value={data.name}
         error={(errors.name?.message as string)}
       />
       <BaseInput
@@ -56,7 +57,7 @@ export function FormPersonalInfo({onNext, onPrev}: Props) {
         title='E-mail Address'
         type="email"
         {...register('email')}
-        value={data.email}
+        defaultValue={data.email}
         error={(errors.email?.message as string)}
       />
       <BaseInput
@@ -64,7 +65,7 @@ export function FormPersonalInfo({onNext, onPrev}: Props) {
         title='Phone Number'
         type="tel"
         {...register('phone')}
-        value={data.phone}
+        defaultValue={data.phone}
         error={(errors.phone?.message as string)}
       />
 

@@ -1,3 +1,4 @@
+import { useCart } from '../../hooks/useCart';
 import { Button } from './Button/styles';
 import { FormHeader } from './FormHeader';
 import * as Styled from './styles';
@@ -8,6 +9,8 @@ interface Form {
 }
 
 export function FormFinishingUp({onNext, onPrev}: Form) {
+  const {data} = useCart();
+
   return (
     <Styled.Container>
       <FormHeader title='Finishing up' subtitle='Double-check everthing looks OK before confirming.' />
@@ -16,12 +19,12 @@ export function FormFinishingUp({onNext, onPrev}: Form) {
         <Styled.CartProducts>
           <Styled.Product>
             <div>
-              <strong>Acarde (Monthly)</strong>
+              <strong>{data.plan?.type} (Monthly)</strong>
               <span>Change</span>
             </div>
 
             <div className="price">
-            $9/mo
+            ${data.plan?.price}/mo
             </div>
           </Styled.Product>
 

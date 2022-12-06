@@ -1,9 +1,14 @@
 import { useState, createContext, useContext, ReactNode } from 'react';
 
 interface ICart {
-  name: string;
-  email: string;
-  phone: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  plan?: {
+    type: string;
+    price: string | undefined;
+  }
+  typeRenovation?: boolean;
 }
 
 interface CartContextProps {
@@ -18,10 +23,19 @@ interface CartProviderProps {
 }
 
 export default function CartProvider({ children }: CartProviderProps) {
-  const [data, setData] = useState<ICart>({} as ICart);
+  const [data, setData] = useState<ICart>({
+    name: '',
+    email: '',
+    phone: '',
+    plan: {
+      type: 'Pro',
+      price: ''
+    },
+    typeRenovation: false
+  } as ICart);
 
   const update = (values: ICart) => {
-    // console.log(values);
+
     setData((prevValues) => ({
       ...prevValues,
       ...values,
