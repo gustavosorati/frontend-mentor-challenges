@@ -35,16 +35,6 @@ interface FormProps {
   addons: 'online-service' | 'larger-storage' | 'custom-profile';
 }
 
-const schema = yup.object({
-  plan: yup.string().required(),
-  renovation: yup.string(),
-  addons: yup.object().shape({
-    onlineService: yup.boolean(),
-    largerStorage: yup.boolean(),
-    customProfile: yup.boolean(),
-  }),
-});
-
 export function Home() {
   const [slideIndex, setSlideIndex] = useState(1);
 
@@ -58,11 +48,6 @@ export function Home() {
 
   function prevSlideIndex() {
     setSlideIndex(prevState => prevState >= 1 ? prevState + -1 : 0);
-  }
-
-  function submitForm(data: any) {
-    console.log('entrou');
-    console.log(data);
   }
 
   return (

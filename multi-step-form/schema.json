@@ -40,5 +40,47 @@
         "price": "150"
       }
     ]
+  },
+  "addons": {
+    "mensal": [
+      {
+        "id": 1,
+        "head": "Online Service",
+        "description": "Access to multiplayer games",
+        "price": "1"
+      },
+      {
+        "id": 2,
+        "head": "Larger storage",
+        "description": "Extra 1TB of cloud save",
+        "price": "2"
+      },
+      {
+        "id": 3,
+        "head": "Customizable Profile",
+        "description": "Custom theme on your profile",
+        "price": "2"
+      }
+    ],
+    "anual": [
+      {
+        "id": 1,
+        "head": "Online Service",
+        "description": "Access to multiplayer games",
+        "price": "10"
+      },
+      {
+        "id": 2,
+        "head": "Larger storage",
+        "description": "Extra 1TB of cloud save",
+        "price": "20"
+      },
+      {
+        "id": 3,
+        "head": "Customizable Profile",
+        "description": "Custom theme on your profile",
+        "price": "20"
+      }
+    ]
   }
 }

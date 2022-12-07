@@ -4,11 +4,15 @@ interface ICart {
   name?: string;
   email?: string;
   phone?: string;
+  typeRenovation?: boolean;
   plan?: {
     type: string;
     price: string | undefined;
-  }
-  typeRenovation?: boolean;
+  };
+  addons?: {
+    type: string;
+    price: string;
+  }[]
 }
 
 interface CartContextProps {

@@ -50,12 +50,11 @@ export function FormSelectPlan({onNext, onPrev}: Props) {
         type: data.plan,
         price: selectedData?.price
       },
-      typeRenovation: data.typeRenovation
+      typeRenovation: data.typeRenovation,
     });
+    onNext();
   }
 
-
-  console.log(selectedTypeRenovation);
   return (
     <FormProvider {...methods}>
       <Styled.Container onSubmit={methods.handleSubmit(handleChangePlan)}>

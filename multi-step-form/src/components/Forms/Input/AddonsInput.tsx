@@ -32,8 +32,8 @@ export const AddonsInput = forwardRef<HTMLInputElement, AddonsInputProps>(({titl
         type="checkbox"
         name="addons"
         id="addons"
-        {...props}
         ref={innerRef}
+        {...props}
       />
 
       <div className="services">

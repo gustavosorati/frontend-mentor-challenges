@@ -30,15 +30,12 @@ export function FormFinishingUp({onNext, onPrev}: Form) {
 
           <Styled.Line />
 
-          <Styled.OptionalProduct>
-            <p>Online service</p>
-            <span>+1/mo</span>
-          </Styled.OptionalProduct>
-
-          <Styled.OptionalProduct>
-            <p>Larger Storage</p>
-            <span>+2/mo</span>
-          </Styled.OptionalProduct>
+          {data.addons?.map((addon) => (
+            <Styled.OptionalProduct key={addon.type}>
+              <p>{addon.type}</p>
+              <span>+{addon.price}/mo</span>
+            </Styled.OptionalProduct>
+          ))}
         </Styled.CartProducts>
 
         <Styled.Amount>
