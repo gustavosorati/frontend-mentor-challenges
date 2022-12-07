@@ -45,8 +45,6 @@ export const Step = styled.div<StepProps>`
   align-items: center;
   gap: 1rem;
 
-  cursor: pointer;
-
   .circle {
     width: 30px;
     height: 30px;
@@ -81,5 +79,4 @@ export const MultiStepForm = styled.div`
   flex: 1;
   padding: 1rem 6rem;
   overflow: hidden;
-
 `;

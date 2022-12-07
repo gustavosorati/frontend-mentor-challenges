@@ -50,12 +50,14 @@ export function Home() {
     setSlideIndex(prevState => prevState >= 1 ? prevState + -1 : 0);
   }
 
+
+
   return (
     <Styled.Container>
       <Styled.Content>
         <Styled.StepController>
           {steps.map(step => (
-            <Styled.Step key={step.id} isActive={slideIndex === step.id} onClick={() => handleChangeSlideIndex(step.id)}>
+            <Styled.Step key={step.id} isActive={slideIndex === step.id}>
               <div className='circle'>{step.id}</div>
               <div>
                 <strong>Step {step.id}</strong>
@@ -65,14 +67,13 @@ export function Home() {
           ))}
         </Styled.StepController>
 
-        {/* <FormProvider {...methods}> */}
         <Styled.MultiStepForm>
           {slideIndex === 1 && <FormPersonalInfo onNext={nextSlideIndex} onPrev={prevSlideIndex} />}
           {slideIndex === 2 && <FormSelectPlan onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
           {slideIndex === 3 && <FormPickAddons onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
           {slideIndex === 4 && <FormFinishingUp onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
         </Styled.MultiStepForm>
-        {/* </FormProvider> */}
+
       </Styled.Content>
     </Styled.Container>
   );
