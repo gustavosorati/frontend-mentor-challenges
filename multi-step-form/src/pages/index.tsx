@@ -6,6 +6,7 @@ import { FormSelectPlan } from '../components/Forms/SelectPlan';
 import * as yup from 'yup';
 
 import * as Styled from './styles';
+import { Button } from '../components/Forms/Button/styles';
 
 const steps = [
   {
@@ -50,8 +51,6 @@ export function Home() {
     setSlideIndex(prevState => prevState >= 1 ? prevState + -1 : 0);
   }
 
-
-
   return (
     <Styled.Container>
       <Styled.Content>
@@ -68,10 +67,10 @@ export function Home() {
         </Styled.StepController>
 
         <Styled.MultiStepForm>
-          {slideIndex === 1 && <FormPersonalInfo onNext={nextSlideIndex} onPrev={prevSlideIndex} />}
-          {slideIndex === 2 && <FormSelectPlan onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
-          {slideIndex === 3 && <FormPickAddons onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
-          {slideIndex === 4 && <FormFinishingUp onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
+          {slideIndex === 1 && <FormPersonalInfo slideIndex={1} onNext={nextSlideIndex} onPrev={prevSlideIndex} />}
+          {slideIndex === 2 && <FormSelectPlan slideIndex={2} onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
+          {slideIndex === 3 && <FormPickAddons slideIndex={3} onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
+          {slideIndex === 4 && <FormFinishingUp slideIndex={4} onNext={nextSlideIndex} onPrev={prevSlideIndex}/> }
         </Styled.MultiStepForm>
 
       </Styled.Content>

@@ -18,11 +18,20 @@ export const Container = styled.form`
   flex-direction: column;
   gap: 1.5rem;
   animation: ${animation} 400ms ease-in-out forwards;
+
+  @media(max-width: 768px) {
+    gap: 1rem;
+  }
 `;
 
 export const InputPriceContainer = styled.div`
   display: flex;
   gap: 1rem;
+
+  @media(max-width: 720px){
+    flex-direction: column;
+    gap: .5rem;
+  }
 `;
 
 export const MonthlyPayment = styled.div`
@@ -124,7 +133,12 @@ export const Amount = styled(OptionalProduct)`
   }
 `;
 
-export const Footer = styled.footer`
+interface FooterProps {
+  slideIndex: number;
+}
+
+
+export const Footer = styled.footer<FooterProps>`
   margin-top: auto;
   display: flex;
   align-items: center;

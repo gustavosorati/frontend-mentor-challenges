@@ -28,4 +28,9 @@ export const Button = styled.button.attrs<ButtonProps>(({variant, type}) => ({
     border-color: ${theme.COLORS['blue-marine']};
     padding: 1rem;
   `}
+
+  @media(max-width: 768px){
+    width: 90px;
+    padding: .5rem;
+  }
 `;

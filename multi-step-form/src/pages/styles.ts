@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import bgSidebarDesktop from '../assets/images/bg-sidebar-desktop.svg';
+import bgSidebarMobile from '../assets/images/bg-sidebar-mobile.svg';
 
 export const Container = styled.main`
   width: 100%;
@@ -19,6 +20,9 @@ export const Content = styled.div`
   padding: 1rem;
   border-radius: 1rem;
 
+  @media(max-width: 480px) {
+    background-color: transparent;
+  }
 `;
 
 export const StepController = styled.div`
@@ -34,6 +38,26 @@ export const StepController = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @media(max-width: 480px) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+
+    background-image: url(${bgSidebarMobile});
+    background-size: cover;
+
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    padding: 2rem 0;
+
+    justify-content: center;
+
+    border-radius: 0;
+  }
 `;
 
 interface StepProps {
@@ -42,7 +66,6 @@ interface StepProps {
 
 export const Step = styled.div<StepProps>`
   display: flex;
-  align-items: center;
   gap: 1rem;
 
   .circle {
@@ -73,10 +96,36 @@ export const Step = styled.div<StepProps>`
     text-transform: uppercase;
     font-size: .875rem;
   }
+
+  @media(max-width: 480px) {
+    gap: 0;
+    height: 50px;
+
+    .circle {
+      margin-right: .5rem;
+    }
+
+    strong, p {
+      visibility: hidden;
+      opacity: 0;
+      display: none;
+      height: 0;
+      width: 0;
+    }
+  }
 `;
 
 export const MultiStepForm = styled.div`
   flex: 1;
   padding: 1rem 6rem;
   overflow: hidden;
+
+  @media(max-width: 480px) {
+    padding: 2rem 1.2rem;
+    z-index: 8;
+    border-radius: 8px;
+    background-color: white;
+
+    overflow: visible;
+  }
 `;

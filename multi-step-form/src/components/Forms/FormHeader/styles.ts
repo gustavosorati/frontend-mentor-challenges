@@ -14,4 +14,18 @@ export const Container = styled.header`
     color: ${({theme}) => theme.COLORS['gray-cool']};
     font-weight: ${({theme}) => theme['FONT-WEIGHT'][500]};
   }
+
+  @media (max-width: 768px) {
+    margin-bottom: 0;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: .875rem;
+    font-weight: ${({theme}) => theme['FONT-WEIGHT'][400]};
+
+    }
+  }
 `;

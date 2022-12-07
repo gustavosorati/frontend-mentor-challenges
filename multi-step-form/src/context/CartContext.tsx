@@ -46,7 +46,6 @@ export default function CartProvider({ children }: CartProviderProps) {
     }));
   };
 
-  console.log(data);
   return (
     <CartContext.Provider value={{data, update}}>
       {children}

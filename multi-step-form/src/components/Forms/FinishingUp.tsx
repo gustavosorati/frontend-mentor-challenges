@@ -4,11 +4,12 @@ import { FormHeader } from './FormHeader';
 import * as Styled from './styles';
 
 interface Form {
+  slideIndex: number;
   onNext: () => void;
   onPrev: () => void;
 }
 
-export function FormFinishingUp({onNext, onPrev}: Form) {
+export function FormFinishingUp({slideIndex, onNext, onPrev}: Form) {
   const {data} = useCart();
 
   const totalAddons = data.addons?.reduce((total, addon) => {
@@ -52,7 +53,7 @@ export function FormFinishingUp({onNext, onPrev}: Form) {
       </Styled.CartContent>
 
 
-      <Styled.Footer>
+      <Styled.Footer slideIndex={slideIndex}>
         <Button onClick={onPrev} variant="SECONDARY">Go Back</Button>
         <Button variant="PRIMARY" onClick={onNext}>Confirm</Button>
       </Styled.Footer>

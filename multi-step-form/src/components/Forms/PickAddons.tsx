@@ -13,7 +13,8 @@ import * as Styled from './styles';
 import schema from '../../../schema.json';
 
 
-interface Form {
+interface Props {
+  slideIndex: number;
   onNext: () => void;
   onPrev: () => void;
 }
@@ -26,7 +27,7 @@ const shemaValidation = yup.object({
   }),
 });
 
-export function FormPickAddons({onNext, onPrev}: Form) {
+export function FormPickAddons({slideIndex, onNext, onPrev}: Props) {
   const {data, update} = useCart();
 
   const addonsSchema = data.typeRenovation ? schema.addons.anual : schema.addons.mensal;
@@ -50,7 +51,6 @@ export function FormPickAddons({onNext, onPrev}: Form) {
     const products = [];
 
     if(dataAddons.addons.onlineService) {
-      console.log('1');
       products.push({
         type: addonsSchema[0].head!,
         price: addonsSchema[0].price
@@ -58,7 +58,6 @@ export function FormPickAddons({onNext, onPrev}: Form) {
     }
 
     if(dataAddons.addons.largerStorage) {
-      console.log('2');
 
       products.push({
         type: addonsSchema[1].head!,
@@ -67,7 +66,6 @@ export function FormPickAddons({onNext, onPrev}: Form) {
     }
 
     if(dataAddons.addons.customProfile) {
-      console.log('3');
 
       products.push({
         type: addonsSchema[2].head!,
@@ -103,7 +101,7 @@ export function FormPickAddons({onNext, onPrev}: Form) {
           {...methods.register('addons.customProfile')}
         />
 
-        <Styled.Footer>
+        <Styled.Footer slideIndex={slideIndex}>
           <Button onClick={onPrev} variant="SECONDARY">Go Back</Button>
           <Button type='submit' variant="PRIMARY">Next Step</Button>
         </Styled.Footer>

@@ -33,6 +33,12 @@ export const BaseInputContainer = styled.label<InputProps>`
     &:focus {
       border-color: ${({theme}) => theme.COLORS['blue-purplish']};
     }
+
+    @media(max-width: 768px) {
+      font-size: .875rem;
+      padding: .675rem;
+      border-radius: 4px;
+    }
   }
 
   .error {
@@ -43,6 +49,10 @@ export const BaseInputContainer = styled.label<InputProps>`
     color: ${({theme}) => theme.COLORS['red-strawberry']};
     font-weight: ${({theme}) => theme['FONT-WEIGHT'][700]};
     font-size: .875rem;
+
+    @media(max-width: 768px) {
+      font-size: .75rem;
+    }
   }
 `;
 
@@ -65,11 +75,9 @@ export const PriceInputContainer = styled.label<PriceInputContainerProps>`
   border: 1.5px solid ${({checked, theme}) => checked ? theme.COLORS['blue-purplish'] : theme.COLORS['gray-light']};
   background-color: ${({checked, theme}) => checked ? theme.COLORS['magnolia'] : 'transparent'};
 
-
   &:hover {
     border-color: ${({theme}) => theme.COLORS['blue-purplish']};
   }
-
 
   input {
     visibility: hidden;
@@ -107,6 +115,24 @@ export const PriceInputContainer = styled.label<PriceInputContainerProps>`
     color: ${({theme}) => theme.COLORS['red-strawberry']};
     font-weight: ${({theme}) => theme['FONT-WEIGHT'][700]};
     font-size: .875rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    flex-direction: row;
+
+    img {
+      margin: 0;
+      margin-right: 1rem;
+    }
+
+    footer {
+      gap: 4px;
+       p, .price {
+        color: ${({theme}) => theme.COLORS['gray-cool']};
+        font-weight: ${({theme}) => theme['FONT-WEIGHT'][400]};
+      }
+    }
   }
 `;
 

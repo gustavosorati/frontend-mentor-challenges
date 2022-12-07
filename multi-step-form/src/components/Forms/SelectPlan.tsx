@@ -13,6 +13,7 @@ import * as Styled from './styles';
 import schema from '../../../schema.json';
 
 interface Props {
+  slideIndex: number;
   onNext: () => void;
   onPrev: () => void;
 }
@@ -22,7 +23,7 @@ const schemaValidation = yup.object({
   typeRenovation: yup.boolean()
 });
 
-export function FormSelectPlan({onNext, onPrev}: Props) {
+export function FormSelectPlan({slideIndex, onNext, onPrev}: Props) {
   const {data, update} = useCart();
   const methods = useForm({
     resolver: yupResolver(schemaValidation),
@@ -99,11 +100,12 @@ export function FormSelectPlan({onNext, onPrev}: Props) {
           <span>Yearly</span>
         </Styled.MonthlyPayment>
 
-        <Styled.Footer>
+        <Styled.Footer slideIndex={slideIndex}>
           <Button onClick={onPrev} variant="SECONDARY">Go Back</Button>
           <Button type="submit" variant="PRIMARY">Next Step</Button>
         </Styled.Footer>
       </Styled.Container>
+
     </FormProvider>
   );
 }
