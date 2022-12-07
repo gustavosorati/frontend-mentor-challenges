@@ -4,19 +4,19 @@
       {
         "id": 1,
         "title": "Arcade",
-        "image_path": "src/assets/images/icon-arcade.svg",
+        "image_path": "./src/assets/images/icon-arcade.svg",
         "price": "9"
       },
       {
         "id": 2,
         "title": "Advanced",
-        "image_path": "/src/assets/images/icon-advanced.svg",
+        "image_path": "./src/assets/images/icon-advanced.svg",
         "price": "12"
       },
       {
         "id": 3,
         "title": "Pro",
-        "image_path": "src/assets/images/icon-pro.svg",
+        "image_path": "./src/assets/images/icon-pro.svg",
         "price": "15"
       }
     ],
@@ -24,7 +24,7 @@
       {
         "id": 1,
         "title": "Arcade",
-        "image_path": "src/assets/images/icon-arcade.svg",
+        "image_path": "./src/assets/images/icon-arcade.svg",
         "price": "90"
       },
       {
@@ -36,7 +36,7 @@
       {
         "id": 3,
         "title": "Pro",
-        "image_path": "src/assets/images/icon-pro.svg",
+        "image_path": "./src/assets/images/icon-pro.svg",
         "price": "150"
       }
     ]
