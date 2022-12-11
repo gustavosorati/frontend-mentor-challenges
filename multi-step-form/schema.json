@@ -4,19 +4,19 @@
       {
         "id": 1,
         "title": "Arcade",
-        "image_path": "./multi-step-form/src/assets/images/icon-arcade.jpg",
+        "image_path": "/public/icon-arcade.jpg",
         "price": "9"
       },
       {
         "id": 2,
         "title": "Advanced",
-        "image_path": "./multi-step-form/src/assets/images/icon-advanced.jpg",
+        "image_path": "./public/icon-arcade.jpg",
         "price": "12"
       },
       {
         "id": 3,
         "title": "Pro",
-        "image_path": "./multi-step-form/src/assets/images/icon-pro.jpg",
+        "image_path": "./static/icon-pro.jpg",
         "price": "15"
       }
     ],
