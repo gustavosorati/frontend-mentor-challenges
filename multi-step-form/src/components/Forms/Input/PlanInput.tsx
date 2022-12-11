@@ -1,8 +1,7 @@
 
 import {useFormContext} from 'react-hook-form';
-import { forwardRef, InputHTMLAttributes, useEffect, useRef, useState } from 'react';
+import { forwardRef, InputHTMLAttributes, useEffect, useState } from 'react';
 import * as Styled from './styles';
-import { useCart } from '../../../hooks/useCart';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement>{
   image: string;
@@ -17,10 +16,9 @@ export const PlanInput = forwardRef<HTMLInputElement, Props>(({
   ...props
 }: Props,
 ref) => {
-  const {data, update} = useCart();
   const [isChecked, setChecked] = useState(false);
 
-  const {register, watch, getValues} = useFormContext();
+  const {watch, getValues} = useFormContext();
 
   function setWhichInputIsChecked() {
     const variavel = getValues('plan');
@@ -45,8 +43,7 @@ ref) => {
         {...props}
       />
 
-      <object id={title} data={image} type="image/svg+xml" />
-      {/* <img src={image} /> */}
+      <img src={image} />
 
       <footer>
         <strong>{title}</strong>
