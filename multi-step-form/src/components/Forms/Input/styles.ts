@@ -86,7 +86,7 @@ export const PriceInputContainer = styled.label<PriceInputContainerProps>`
     height: 0px;
   }
 
-  img {
+  img, object {
     margin-bottom: 3rem;
     width: 50px;
     height: 50px;
@@ -121,7 +121,7 @@ export const PriceInputContainer = styled.label<PriceInputContainerProps>`
     width: 100%;
     flex-direction: row;
 
-    img {
+    img, object {
       margin: 0;
       margin-right: 1rem;
     }

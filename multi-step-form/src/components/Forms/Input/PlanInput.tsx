@@ -45,7 +45,8 @@ ref) => {
         {...props}
       />
 
-      <img src={image} />
+      <object id={title} data={image} type="image/svg+xml" />
+      {/* <img src={image} /> */}
 
       <footer>
         <strong>{title}</strong>
