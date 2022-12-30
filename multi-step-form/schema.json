@@ -4,7 +4,7 @@
       {
         "id": 1,
         "title": "Arcade",
-        "image_path": "/public/icon-arcade.svg",
+        "image_path": "./icon-arcade.svg",
         "price": "9"
       },
       {
