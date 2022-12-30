@@ -10,13 +10,13 @@
       {
         "id": 2,
         "title": "Advanced",
-        "image_path": "/public/icon-advanced.svg",
+        "image_path": "./icon-advanced.svg",
         "price": "12"
       },
       {
         "id": 3,
         "title": "Pro",
-        "image_path": "./public/icon-pro.svg",
+        "image_path": "./icon-pro.svg",
         "price": "15"
       }
     ],
@@ -24,19 +24,19 @@
       {
         "id": 1,
         "title": "Arcade",
-        "image_path": "./public/icon-arcade.svg",
+        "image_path": "./icon-arcade.svg",
         "price": "90"
       },
       {
         "id": 2,
         "title": "Advanced",
-        "image_path": "./public/icon-advanced.svg",
+        "image_path": "./icon-advanced.svg",
         "price": "120"
       },
       {
         "id": 3,
         "title": "Pro",
-        "image_path": "./public/icon-pro.svg",
+        "image_path": "./icon-pro.svg",
         "price": "150"
       }
     ]
