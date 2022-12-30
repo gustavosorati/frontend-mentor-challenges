@@ -4,13 +4,13 @@
       {
         "id": 1,
         "title": "Arcade",
-        "image_path": "./public/icon-arcade.svg",
+        "image_path": "/public/icon-arcade.svg",
         "price": "9"
       },
       {
         "id": 2,
         "title": "Advanced",
-        "image_path": "./public/icon-advanced.svg",
+        "image_path": "/public/icon-advanced.svg",
         "price": "12"
       },
       {
